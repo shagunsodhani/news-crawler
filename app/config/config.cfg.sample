@@ -1,0 +1,17 @@
+[mysql]
+host = 
+user = 
+passwd = 
+db = 
+charset = utf8
+use_unicode = True
+
+[mongo]
+host = localhost
+port = 27017
+db = 
+
+[redis]
+host = localhost
+port = 6379
+db = 
