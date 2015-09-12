@@ -26,12 +26,8 @@ class Crawler(object):
     def jsonify(self, news_source):
         data = {}
         data['articles'] = []
-        data['published'] = []
         for article in news_source.articles:
             data['articles'].append(article.url)
-            article.get_publish_timestamp()
-            published_at = article.publish_timestamp
-            data['published'].append(published_at)
         data['newssource'] = news_source.url
         return json.dumps(data)
 
