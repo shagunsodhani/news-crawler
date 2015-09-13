@@ -26,8 +26,11 @@ class Crawler(object):
     def jsonify(self, news_source):
         data = {}
         data['articles'] = []
+        data['categories'] = []
         for article in news_source.articles:
             data['articles'].append(article.url)
+        for category in news_source.categories:
+            data['categories'].append(category.url)    
         data['newssource'] = news_source.url
         return json.dumps(data)
 

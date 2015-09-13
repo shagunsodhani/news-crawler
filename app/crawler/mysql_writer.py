@@ -25,8 +25,7 @@ class MysqlWriter(object):
 
     def write_to_mysql(self):
         self.write_article()
-        # self.write_category()
-        # pass
+        self.write_category()
 
     def write_article(self):
         base_sql = "INSERT INTO article (id,url,newssource,crawled_at) VALUES "
@@ -43,7 +42,32 @@ class MysqlWriter(object):
             cleaned_article = str(article.replace("\"","\\\"").replace("\'","\\\'").strip())
             key = str(hashlib.sha1(cleaned_article).hexdigest())
             crawled_at = str(int(time.time()))
-            to_insert="(\""+key+"\",\""+cleaned_article+"\",\""+cleaned_newssource+"\","+crawled_at+"\"),"
+            to_insert="(\""+key+"\",\""+cleaned_article+"\",\""+cleaned_newssource+"\","+crawled_at+"),"
+            sql+=to_insert
+            count+=1
+            if(count%100==0):
+                sql=sql[:-1]+end_sql
+                mysql.write(sql, self.cursor, self.conn)
+                sql = base_sql
+        sql=sql[:-1]
+        if(sql[-1] == ")"):
+            sql=sql+end_sql
+            mysql.write(sql, self.cursor, self.conn)
+
+    def write_category(self):
+        base_sql = "INSERT INTO category (id,url) VALUES "
+        end_sql = " ON DUPLICATE KEY UPDATE url=url"
+        sql = base_sql
+        to_insert = ""
+        if(self.message['data']==1L):
+            return
+        data = json.loads(self.message['data'])
+        categories = data['categories']
+        count = 0
+        for category in categories:
+            cleaned_category = str(category.replace("\"","\\\"").replace("\'","\\\'").strip())
+            key = str(hashlib.sha1(cleaned_category).hexdigest())
+            to_insert="(\""+key+"\",\""+cleaned_category+"\"),"
             sql+=to_insert
             count+=1
             if(count%100==0):

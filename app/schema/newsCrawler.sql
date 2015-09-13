@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 12, 2015 at 03:19 PM
+-- Generation Time: Sep 13, 2015 at 01:42 PM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE IF NOT EXISTS `article` (
   `id` varchar(40) NOT NULL,
-  `url` varchar(2000) NOT NULL,
-  `newssource` varchar(1000) NOT NULL,
+  `url` varchar(4000) NOT NULL,
+  `newssource` varchar(2000) NOT NULL,
   `crawled_at` int(11) NOT NULL,
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
@@ -53,10 +53,9 @@ CREATE TABLE IF NOT EXISTS `article_category` (
 --
 
 CREATE TABLE IF NOT EXISTS `category` (
-  `id` int(11) NOT NULL,
-  `name` varchar(200) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
+  `id` varchar(40) NOT NULL,
+  `url` varchar(2000) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
