@@ -3,14 +3,14 @@
 import __init__
 
 import newspaper
-from queue import redis_queue
+from mq import redis_queue
 from database import mysql
 import hashlib
 import json
 import time
 
 class MysqlWriter(object):
-    """Crawler class prepares a news source and writes it into the redis queue"""
+    """Crawler class prepares a news source and writes it into the redis mq"""
     def __init__(self):
         self.queue = redis_queue.connect()
         self.p = self.queue.pubsub()

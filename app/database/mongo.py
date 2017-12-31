@@ -1,7 +1,7 @@
 #! /usr/bin/python
 
 from os import path
-from ConfigParser import ConfigParser
+from configparser import ConfigParser
 
 #parse config
 config=ConfigParser()
@@ -18,4 +18,4 @@ def connect(service_name="mongo"):
     return database
 
 if __name__ == "__main__":
-	print connect()
+	print(connect())

@@ -4,11 +4,11 @@ import __init__
 
 from os.path import dirname, join, abspath
 import newspaper
-from queue import redis_queue
+from mq import redis_queue
 import json
 
 class Crawler(object):
-    """Crawler class prepares a news source and writes it into the redis queue"""
+    """Crawler class prepares a news source and writes it into the redis mq"""
     def __init__(self):
         self.queue = redis_queue.connect()
 
@@ -37,3 +37,4 @@ class Crawler(object):
 if __name__ == "__main__":
     crawl = Crawler()
     crawl.crawl_all()
+    print("Completed Crawl")

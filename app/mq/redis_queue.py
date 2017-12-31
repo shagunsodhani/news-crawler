@@ -1,7 +1,7 @@
 #! /usr/bin/python
 
 from os import path
-from ConfigParser import ConfigParser
+from configparser import ConfigParser
 
 import redis
 
@@ -17,4 +17,4 @@ def connect(service_name="redis"):
     return r
 
 if __name__ == "__main__":
-	print connect()
+    print(connect())
